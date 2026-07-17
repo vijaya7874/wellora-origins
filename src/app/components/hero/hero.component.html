@@ -1,6 +1,6 @@
 <section
   id="home"
-  class="relative flex min-h-screen items-center overflow-hidden pt-32 pb-20"
+  class="relative flex min-h-screen flex-col items-center overflow-hidden pt-32 pb-20 md:flex-row"
   [class.is-started]="started()"
   (mousemove)="onMouseMove($event)"
 >
@@ -10,25 +10,10 @@
   <div class="anim-blob absolute top-[30%] left-[38%] h-[30vmin] w-[30vmin] bg-[#e6efdd] opacity-70" style="animation-delay: -3s;"></div>
 
   <!-- floating leaves -->
-  <div class="absolute left-[4%] top-[24%] hidden lg:block" [style.transform]="leafTransform()">
+  <div class="absolute left-[4%] top-[24%] hidden md:block" [style.transform]="leafTransform()">
     <div class="hero-leaf-branch">
       <div class="anim-sway">
         <app-leaf-branch className="h-44 w-44 text-leaf" />
-      </div>
-    </div>
-  </div>
-
-  <div class="absolute right-[5%] top-[16%] hidden lg:block" [style.transform]="jarTransform()">
-    <div class="hero-jar" #jarAnchor [style.opacity]="jarAnchorOpacity()">
-      <div class="anim-float">
-        <app-jar-svg
-          icon="amla"
-          powderTop="#d3c98f"
-          powderBottom="#b3a05e"
-          label="Amla"
-          sub="Whole fruit powder"
-          className="h-64 w-auto drop-shadow-[0_30px_35px_rgba(18,38,26,.28)]"
-        />
       </div>
     </div>
   </div>
@@ -50,7 +35,7 @@
   </div>
 
   <!-- copy -->
-  <div class="relative z-10 mx-auto max-w-3xl px-6 text-center lg:ml-[16%] lg:text-left" [style]="headStyle()">
+  <div class="relative z-10 mx-auto max-w-3xl px-6 text-center md:ml-[26%] md:text-left">
     <div class="overflow-hidden">
       <p class="hero-kicker text-[11px] font-bold uppercase tracking-[0.34em] text-moss sm:text-xs">
         From our farm to your family
@@ -69,14 +54,15 @@
       </span>
     </h1>
 
-    <p class="hero-sub mx-auto mt-6 max-w-md text-[15px] leading-relaxed text-forest/70 sm:text-base lg:mx-0">
+    <p class="hero-sub mx-auto mt-6 max-w-md text-[15px] leading-relaxed text-forest/70 sm:text-base md:mx-0">
       From our farming roots to your family's wellness — pure, trusted, and
       affordable superfoods for everyday living.
     </p>
 
-    <div class="hero-cta mt-9 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
+    <div class="hero-cta mt-9 flex flex-wrap items-center justify-center gap-4 md:justify-start">
       <a
         href="#shop"
+        (click)="onShopCtaClick($event)"
         class="group relative overflow-hidden rounded-full bg-forest px-8 py-4 text-sm font-bold text-cream shadow-[0_18px_35px_-14px_rgba(18,38,26,.6)] transition-transform duration-300 ease-in-out hover:scale-[1.04] active:scale-95"
       >
         <span class="relative z-10">Shop our superfoods</span>
@@ -90,7 +76,7 @@
       </a>
     </div>
 
-    <div class="hero-rating mt-9 flex items-center justify-center gap-3 lg:justify-start">
+    <div class="hero-rating mt-9 flex items-center justify-center gap-3 md:justify-start">
       <div class="flex text-honey">
         @for (i of stars; track i) {
           <span class="hero-star" [style.--star-delay]="starDelay(i)">
@@ -104,8 +90,27 @@
     </div>
   </div>
 
+  <!-- jar: stacks below the copy on mobile (normal block flow), floats top-right on desktop -->
+  <div
+    class="hero-jar-slot relative z-10 mt-10 flex w-full justify-center px-6 md:absolute md:right-[5%] md:top-[16%] md:mt-0 md:block md:w-auto md:px-0"
+    [style.transform]="jarTransform()"
+  >
+    <div class="hero-jar" #jarAnchor [style.opacity]="jarAnchorOpacity()">
+      <div class="anim-float">
+        <app-jar-svg
+          icon="moringa"
+          powderTop="#9dbb83"
+          powderBottom="#6f9a5c"
+          label="Moringa"
+          sub="Pure leaf powder"
+          className="h-52 w-auto drop-shadow-[0_30px_35px_rgba(18,38,26,.28)] md:h-64"
+        />
+      </div>
+    </div>
+  </div>
+
   <!-- scroll cue -->
-  <div class="hero-scroll-cue absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
+  <div class="hero-scroll-cue absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2">
     <div class="flex h-12 w-7 items-start justify-center rounded-full border-2 border-forest/30 p-1.5">
       <div class="anim-bob h-2.5 w-2.5 rounded-full bg-forest"></div>
     </div>

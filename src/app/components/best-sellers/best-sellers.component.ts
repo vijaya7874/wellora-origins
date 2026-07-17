@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, signal } from '@angular/core';
 import { JarSvgComponent, JarIcon } from '../jar-svg/jar-svg.component';
 import { StarIconComponent } from '../leaf-art/star-icon.component';
 import { RevealDirective } from '../../directives/reveal.directive';
 import { WordRevealComponent } from '../reveal/word-reveal.component';
 import { JarFlightService } from '../../services/jar-flight.service';
+import { CartService } from '../../services/cart.service';
 
 interface Stat {
   big: string;
@@ -11,9 +12,11 @@ interface Stat {
 }
 
 interface Product {
+  id: string;
   name: string;
   weight: string;
   price: string;
+  priceValue: number;
   mrp?: string;
   rating: string;
   reviews: number;
@@ -35,13 +38,22 @@ interface Product {
 export class BestSellersComponent implements AfterViewInit {
   readonly starRow = [0, 1, 2, 3, 4];
 
-  constructor(private el: ElementRef<HTMLElement>, readonly flight: JarFlightService) {}
+  /** product id -> true briefly, drives the "Added ✓" button feedback state */
+  readonly justAdded = signal<Record<string, boolean>>({});
+
+  constructor(
+    private el: ElementRef<HTMLElement>,
+    readonly flight: JarFlightService,
+    readonly cart: CartService
+  ) {}
 
   readonly products: Product[] = [
     {
+      id: 'moringa',
       name: 'Moringa Powder',
       weight: '100g / 200g',
       price: '₹199',
+      priceValue: 199,
       rating: '4.8',
       reviews: 214,
       badge: 'Best Seller',
@@ -58,9 +70,11 @@ export class BestSellersComponent implements AfterViewInit {
       tint: '#eef3e6',
     },
     {
+      id: 'amla',
       name: 'Amla Powder',
       weight: '200g',
       price: '₹275.54',
+      priceValue: 275.54,
       mrp: '₹599',
       rating: '4.7',
       reviews: 168,
@@ -77,9 +91,11 @@ export class BestSellersComponent implements AfterViewInit {
       tint: '#f5eedd',
     },
     {
+      id: 'abc',
       name: 'ABC Powder',
       weight: '200g',
       price: '₹499',
+      priceValue: 499,
       mrp: '₹599',
       rating: '4.9',
       reviews: 302,
@@ -106,14 +122,31 @@ export class BestSellersComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const amlaSlot = this.el.nativeElement.querySelector<HTMLElement>('#product-jar-amla');
-    if (amlaSlot) {
-      this.flight.registerEnd(amlaSlot);
+    const moringaSlot = this.el.nativeElement.querySelector<HTMLElement>('#product-jar-moringa');
+    if (moringaSlot) {
+      this.flight.registerEnd(moringaSlot);
     }
   }
 
-  /** The Amla card's own jar stays hidden until the flying jar has docked. */
+  /** The Moringa card's own jar stays hidden until the flying jar has docked. */
   jarSlotOpacity(icon: JarIcon): number {
-    return icon === 'amla' && this.flight.progress() < 1 ? 0 : 1;
+    return icon === 'moringa' && this.flight.progress() < 1 ? 0 : 1;
+  }
+
+  addToBag(p: Product): void {
+    this.cart.add(
+      {
+        id: p.id,
+        name: p.name,
+        weight: p.weight,
+        price: p.priceValue,
+        jar: p.jar,
+      },
+      1
+    );
+    this.justAdded.update((state) => ({ ...state, [p.id]: true }));
+    setTimeout(() => {
+      this.justAdded.update((state) => ({ ...state, [p.id]: false }));
+    }, 1400);
   }
 }

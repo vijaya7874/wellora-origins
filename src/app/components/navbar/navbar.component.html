@@ -24,6 +24,7 @@
         @for (l of links; track l; let i = $index) {
           <a
             [href]="'#' + l.toLowerCase()"
+            (click)="onNavLinkClick($event, l)"
             class="nav-link group relative text-sm font-semibold text-forest"
             [style.--link-delay]="linkDelay(i)"
           >
@@ -44,7 +45,7 @@
       </button>
 
       <!-- logo -->
-      <a href="#home" class="flex flex-col items-center gap-0.5 justify-self-center">
+      <a routerLink="/" class="flex flex-col items-center gap-0.5 justify-self-center">
         <app-sprout-logo className="h-6 w-6" />
         <span class="font-serif-brand text-xl font-semibold tracking-tight text-forest sm:text-2xl">
           Wellora Origins
@@ -59,15 +60,19 @@
             <path d="M4 21 C4 16.5, 7.5 14, 12 14 C16.5 14, 20 16.5, 20 21" stroke-linecap="round" />
           </svg>
         </button>
-        <button aria-label="Bag" class="relative rounded-full p-2 transition-colors duration-300 ease-in-out hover:bg-forest/10">
+        <a
+          routerLink="/checkout"
+          aria-label="Bag"
+          class="relative rounded-full p-2 transition-colors duration-300 ease-in-out hover:bg-forest/10"
+        >
           <svg viewBox="0 0 24 24" class="h-5 w-5 text-forest" fill="none" stroke="currentColor" stroke-width="1.8">
             <path d="M5 8 H19 L18 21 H6 Z" stroke-linejoin="round" />
             <path d="M9 8 V6.5 a3 3 0 0 1 6 0 V8" stroke-linecap="round" />
           </svg>
           <span class="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-forest text-[9px] font-bold text-cream">
-            0
+            {{ cart.totalCount() }}
           </span>
-        </button>
+        </a>
       </div>
     </div>
 
@@ -78,7 +83,7 @@
           @for (l of links; track l) {
             <a
               [href]="'#' + l.toLowerCase()"
-              (click)="closeMenu()"
+              (click)="onNavLinkClick($event, l); closeMenu()"
               class="border-b border-forest/10 py-3 font-serif-brand text-2xl text-forest"
             >
               {{ l }}

@@ -1,4 +1,9 @@
 .preloader-root {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
   transform: translateY(0);
 }
@@ -7,12 +12,14 @@
 }
 
 .preloader-glow {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.6);
   opacity: 0;
-  transform: scale(0.6);
   animation: glow-in 2.4s ease-out forwards;
 }
 @keyframes glow-in {
-  to { opacity: 1; transform: scale(1.15); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
 }
 
 .preloader-line {

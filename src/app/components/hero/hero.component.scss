@@ -9,7 +9,7 @@
 .hero-jar {
   opacity: 0;
   transform: translateY(70px) rotate(8deg);
-  transition: opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1) 1.05s,
+  transition: opacity 0.4s ease-out,
               transform 1.3s cubic-bezier(0.22, 1, 0.36, 1) 1.05s;
 }
 .hero-pop-1 {

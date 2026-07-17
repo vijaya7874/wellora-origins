@@ -1,0 +1,62 @@
+<section class="relative bg-forest text-cream">
+  <!-- curved top divider -->
+  <svg viewBox="0 0 1440 90" class="block w-full bg-cream" style="height: 90px;" preserveAspectRatio="none"
+    aria-hidden="true">
+    <path d="M0 90 H1440 V72 C1100 2, 340 2, 0 72 Z" fill="#1c3a2a" />
+  </svg>
+
+  <div class="grain relative overflow-hidden py-24 sm:py-32">
+    <!-- glow accents -->
+    <div class="anim-blob absolute -left-32 top-24 h-96 w-96 bg-moss/25"></div>
+    <div class="anim-blob absolute -right-32 bottom-24 h-96 w-96 bg-leaf/15" style="animation-delay: -7s;"></div>
+
+    <div class="relative mx-auto max-w-6xl px-6">
+      <div class="text-center">
+        <p appReveal class="text-[11px] font-bold uppercase tracking-[0.34em] text-sprout">How it works</p>
+        <h2 class="mt-4 font-serif-brand text-[clamp(2.2rem,5.5vw,4rem)] font-medium leading-tight tracking-tight">
+          <app-word-reveal text="From our farm to your jar" />
+        </h2>
+      </div>
+
+      <div class="relative mt-20">
+        <!-- scroll-drawn connector line -->
+        <div class="absolute left-1/2 top-0 hidden h-full w-1 -translate-x-1/2 md:block" aria-hidden="true">
+          <div #growLine class="grow-line h-full w-full rounded-full bg-sprout/55"></div>
+        </div>
+
+        <!-- steps -->
+        <div class="relative z-20 space-y-14 md:space-y-24">
+          @for (s of steps; track s.n) {
+          <div appReveal [y]="30"
+            [class]="s.side === 'left' ? 'md:flex md:items-center md:justify-start' : 'md:flex md:items-center md:justify-end'">
+            <div
+              class="glass-card max-w-sm rounded-3xl p-7 transition-transform duration-500 ease-in-out hover:scale-[1.03]"
+              [class]="s.side === 'left' ? 'md:mr-auto md:text-right' : 'md:ml-auto'">
+              <span class="font-serif-brand text-4xl font-semibold text-honey/90">{{ s.n }}</span>
+              <h3 class="mt-2 font-serif-brand text-2xl font-medium text-cream">{{ s.title }}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-cream/70">{{ s.text }}</p>
+            </div>
+          </div>
+          }
+        </div>
+
+        <!-- sticky center jar overlay -->
+        <div class="pointer-events-none absolute inset-0 z-10 hidden md:block" aria-hidden="true">
+          <div class="sticky top-1/2 mx-auto w-40 -translate-y-1/2">
+            <div #jarReveal class="process-jar">
+              <div class="anim-float">
+                <app-jar-svg icon="moringa" powderTop="#9dbb83" powderBottom="#6f9a5c" label="Moringa"
+                  sub="Pure leaf powder" className="w-full drop-shadow-[0_0_45px_rgba(158,196,154,.4)]" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- curved bottom divider -->
+  <svg viewBox="0 0 1440 90" class="block w-full" style="height: 90px;" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 90 H1440 V72 C1100 2, 340 2, 0 72 Z" fill="#faf7ef" />
+  </svg>
+</section>

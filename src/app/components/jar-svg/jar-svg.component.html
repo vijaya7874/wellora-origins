@@ -1,0 +1,103 @@
+<svg [attr.class]="className()" viewBox="0 0 200 260" role="img" [attr.aria-label]="label()">
+  <defs>
+    <linearGradient [attr.id]="gradId" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" [attr.stop-color]="powderTop()" />
+      <stop offset="100%" [attr.stop-color]="powderBottom()" />
+    </linearGradient>
+    <linearGradient [attr.id]="glassId" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".55" />
+      <stop offset="18%" stop-color="#ffffff" stop-opacity=".12" />
+      <stop offset="82%" stop-color="#ffffff" stop-opacity=".08" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity=".4" />
+    </linearGradient>
+  </defs>
+
+  <!-- shadow -->
+  <ellipse cx="100" cy="246" rx="62" ry="9" fill="#12261a" opacity=".12" />
+
+  <!-- lid -->
+  <rect x="52" y="14" width="96" height="26" rx="7" fill="#22312a" />
+  <rect x="52" y="14" width="96" height="9" rx="4.5" fill="#31463a" />
+  @for (i of [0,1,2,3,4,5,6,7,8,9,10,11]; track i) {
+    <rect [attr.x]="57 + i * 7.4" y="16" width="2.4" height="22" rx="1.2" fill="#18241d" opacity=".65" />
+  }
+
+  <!-- neck -->
+  <rect x="60" y="40" width="80" height="10" fill="#e7e2d4" />
+
+  <!-- body -->
+  <path d="M60 50 C 48 56, 44 66, 44 80 L 44 218 C 44 236, 58 244, 100 244 C 142 244, 156 236, 156 218 L 156 80 C 156 66, 152 56, 140 50 Z"
+        [attr.fill]="'url(#' + gradId + ')'" />
+
+  <!-- powder surface -->
+  <ellipse cx="100" cy="62" rx="42" ry="7" [attr.fill]="powderTop()" opacity=".9" />
+
+  <!-- glass sheen -->
+  <path d="M60 50 C 48 56, 44 66, 44 80 L 44 218 C 44 236, 58 244, 100 244 C 142 244, 156 236, 156 218 L 156 80 C 156 66, 152 56, 140 50 Z"
+        [attr.fill]="'url(#' + glassId + ')'" />
+  <path d="M56 70 C 52 78, 51 90, 51 110 L 51 200" stroke="#ffffff" stroke-opacity=".5" stroke-width="6" stroke-linecap="round" fill="none" />
+
+  <!-- label -->
+  <rect x="44" y="96" width="112" height="92" fill="#fbf9f2" />
+  <rect x="44" y="96" width="112" height="4" fill="#e5decb" />
+  <rect x="44" y="184" width="112" height="4" fill="#e5decb" />
+
+  <!-- brand mark -->
+  <g transform="translate(100 108)">
+    <path d="M0 6 C -1 -2, -1 -6, 0 -10" stroke="#3f6b4f" stroke-width="1.6" fill="none" stroke-linecap="round" />
+    <ellipse cx="-4.5" cy="-6" rx="4.5" ry="2.6" fill="#6ea877" transform="rotate(-30 -4.5 -6)" />
+    <ellipse cx="4.5" cy="-8" rx="4.5" ry="2.6" fill="#54906a" transform="rotate(24 4.5 -8)" />
+  </g>
+  <text x="100" y="124" text-anchor="middle" font-family="Fraunces, serif" font-weight="600" font-size="10.5" fill="#1c3a2a" letter-spacing=".5">
+    WELLORA
+  </text>
+
+  <!-- per-product label icon -->
+  @switch (icon()) {
+    @case ('moringa') {
+      <g transform="translate(100 128)">
+        <path d="M0 14 C 0 4, 0 -6, 0 -14" stroke="#3f6b4f" stroke-width="2" fill="none" stroke-linecap="round" />
+        <g transform="scale(-1 1)">
+          <ellipse cx="7" cy="-8" rx="6.5" ry="4" fill="#6ea877" transform="rotate(-28 7 -8)" />
+          <ellipse cx="8" cy="2" rx="6.5" ry="4" fill="#54906a" transform="rotate(-12 8 2)" />
+          <ellipse cx="6" cy="11" rx="5.5" ry="3.5" fill="#7fb589" transform="rotate(8 6 11)" />
+        </g>
+        <g transform="scale(1 1)">
+          <ellipse cx="7" cy="-8" rx="6.5" ry="4" fill="#6ea877" transform="rotate(-28 7 -8)" />
+          <ellipse cx="8" cy="2" rx="6.5" ry="4" fill="#54906a" transform="rotate(-12 8 2)" />
+          <ellipse cx="6" cy="11" rx="5.5" ry="3.5" fill="#7fb589" transform="rotate(8 6 11)" />
+        </g>
+        <circle cx="0" cy="-16" r="4.5" fill="#9ec49a" />
+      </g>
+    }
+    @case ('amla') {
+      <g transform="translate(100 128)">
+        <circle cx="-6" cy="4" r="11" fill="#a9bd5a" />
+        <circle cx="7" cy="6" r="9" fill="#c2cf72" />
+        <path d="M-6 -7 C -4 -14, 2 -16, 6 -15" stroke="#3f6b4f" stroke-width="2" fill="none" stroke-linecap="round" />
+        <ellipse cx="8" cy="-13" rx="6" ry="3.4" fill="#6ea877" transform="rotate(-24 8 -13)" />
+        <path d="M-11 2 C -9 -2, -3 -3, -1 1" stroke="#8aa344" stroke-width="1.6" fill="none" stroke-linecap="round" />
+      </g>
+    }
+    @default {
+      <g transform="translate(100 128)">
+        <circle cx="-9" cy="3" r="8" fill="#d6604f" />
+        <path d="M-9 -5 C -9 -9, -6 -11, -3 -11" stroke="#3f6b4f" stroke-width="1.8" fill="none" stroke-linecap="round" />
+        <ellipse cx="6" cy="6" rx="9" ry="7" fill="#c9764b" />
+        <path d="M2 0 C 4 -2, 8 -2, 10 0" stroke="#a3552f" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <ellipse cx="9" cy="-7" rx="8" ry="6" fill="#e0a34e" transform="rotate(-14 9 -7)" />
+        <ellipse cx="13" cy="-14" rx="5" ry="3" fill="#6ea877" transform="rotate(-30 13 -14)" />
+      </g>
+    }
+  }
+
+  <text x="100" y="162" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="12.5" fill="#12261a">
+    {{ label() }}
+  </text>
+  <text x="100" y="174" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="600" font-size="6.4" fill="#3f6b4f" letter-spacing="1.1">
+    {{ sub().toUpperCase() }}
+  </text>
+  <text x="100" y="183" text-anchor="middle" font-family="Manrope, sans-serif" font-size="5.6" fill="#8a8577" letter-spacing=".6">
+    NET WEIGHT 200g
+  </text>
+</svg>

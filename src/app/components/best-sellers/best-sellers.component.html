@@ -1,0 +1,111 @@
+<section id="shop" class="relative overflow-hidden py-28 sm:py-36">
+  <!-- giant ghost word -->
+  <span
+    aria-hidden="true"
+    class="text-stroke-forest pointer-events-none absolute -top-4 left-1/2 -translate-x-1/2 whitespace-nowrap font-serif-brand text-[19vw] font-bold opacity-[.35]"
+  >
+    Superfoods
+  </span>
+
+  <div class="relative mx-auto max-w-6xl px-6">
+    <div class="text-center">
+      <p appReveal class="text-[11px] font-bold uppercase tracking-[0.34em] text-moss">Loved most</p>
+      <h2 class="mt-4 font-serif-brand text-[clamp(2.2rem,5.5vw,4rem)] font-medium leading-tight tracking-tight text-forest">
+        <app-word-reveal text="Featured best sellers" />
+      </h2>
+      <p appReveal [delay]="0.25" class="mt-4 text-forest/60">The three our customers reach for again and again.</p>
+    </div>
+
+    <div class="mt-16 grid gap-8 md:grid-cols-3">
+      @for (p of products; track p.name; let i = $index) {
+        <article
+          appReveal
+          [y]="90"
+          [rotate]="cardRotate(i)"
+          [delay]="cardDelay(i)"
+          class="best-seller-card group relative cursor-pointer overflow-hidden rounded-[28px] border border-forest/10 bg-white shadow-[0_24px_60px_-30px_rgba(18,38,26,.25)] transition-transform duration-300 ease-in-out hover:-translate-y-3"
+        >
+          <!-- jar area -->
+          <div class="relative flex h-80 items-end justify-center overflow-hidden pb-2" [style.background-color]="p.tint">
+            @if (p.badge) {
+              <span
+                class="absolute left-4 top-4 z-20 rounded-full px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em]"
+                [class]="p.badgeTone === 'green' ? 'bg-forest text-cream' : 'bg-clay text-cream'"
+              >
+                {{ p.badge }}
+              </span>
+            }
+            <div
+              [id]="'product-jar-' + p.jar.icon"
+              class="relative z-10 transition-transform duration-500 ease-out group-hover:scale-[1.07] group-hover:-rotate-2"
+              [style.opacity]="jarSlotOpacity(p.jar.icon)"
+              [style.transition]="'opacity 0.3s ease-out, transform 0.5s ease-out'"
+            >
+              <app-jar-svg
+                [icon]="p.jar.icon"
+                [powderTop]="p.jar.top"
+                [powderBottom]="p.jar.bottom"
+                [label]="p.name.replace(' Powder', '')"
+                [sub]="p.jar.sub"
+                className="h-64 w-auto drop-shadow-[0_24px_24px_rgba(18,38,26,.22)]"
+              />
+            </div>
+
+            <!-- hover nutrition overlay -->
+            <div class="absolute inset-0 z-20 flex translate-y-full flex-col justify-center bg-forest/95 px-7 text-cream backdrop-blur-sm transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-y-0">
+              <p class="font-serif-brand text-xl italic text-sprout">{{ p.tagline }}</p>
+              <div class="mt-4 space-y-2.5">
+                @for (s of p.stats; track s.small) {
+                  <div class="flex items-baseline gap-3 border-b border-cream/15 pb-2">
+                    <span class="font-serif-brand text-2xl font-semibold text-honey">{{ s.big }}</span>
+                    <span class="text-xs font-semibold text-cream/85">{{ s.small }}</span>
+                  </div>
+                }
+              </div>
+              <p class="mt-4 text-[11px] font-medium tracking-wide text-cream/60">{{ p.footnote }}</p>
+            </div>
+          </div>
+
+          <!-- meta -->
+          <div class="relative z-10 bg-white p-6">
+            <div class="flex items-center gap-2">
+              <div class="flex text-honey">
+                @for (k of starRow; track k) {
+                  <app-star-icon className="h-3.5 w-3.5" />
+                }
+              </div>
+              <span class="text-xs font-bold text-forest/70">{{ p.rating }} ({{ p.reviews }})</span>
+            </div>
+            <h3 class="mt-2 font-serif-brand text-2xl font-semibold text-forest">{{ p.name }}</h3>
+            <p class="mt-0.5 text-xs font-semibold text-forest/50">{{ p.weight }}</p>
+            <div class="mt-4 flex items-center justify-between">
+              <p class="font-serif-brand text-xl font-semibold text-forest">
+                {{ p.price }}
+                @if (p.mrp) {
+                  <span class="ml-1 text-sm font-normal text-forest/40 line-through">{{ p.mrp }}</span>
+                }
+              </p>
+              <button
+                [attr.aria-label]="'Add ' + p.name + ' to bag'"
+                class="flex h-11 w-11 items-center justify-center rounded-full bg-forest text-cream transition-all duration-300 ease-in-out hover:rotate-90 hover:bg-moss active:scale-90"
+              >
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+                  <path d="M12 5 v14 M5 12 h14" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+
+    <p appReveal [delay]="0.2" class="mt-14 text-center">
+      <a
+        href="#shop"
+        class="inline-block rounded-full border-[1.5px] border-forest px-9 py-4 text-sm font-bold text-forest transition-all duration-300 ease-in-out hover:bg-forest hover:text-cream"
+      >
+        View all products
+      </a>
+    </p>
+  </div>
+</section>

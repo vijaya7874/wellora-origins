@@ -1,0 +1,91 @@
+<header class="nav-header fixed inset-x-0 top-0 z-50" [class.is-started]="started()">
+
+  <!-- announcement bar -->
+  <div
+    class="overflow-hidden bg-forest text-cream transition-all duration-500 ease-in-out"
+    [class.max-h-0]="scrolled()"
+    [class.max-h-12]="!scrolled()"
+  >
+    <p class="flex items-center justify-center gap-2 px-4 py-2.5 text-center text-[11px] font-semibold tracking-[0.14em] sm:text-xs">
+      <app-sprout-logo className="h-3.5 w-3.5" color="#9ec49a" />
+      100% NATURAL &middot; NO ADDED SUGAR, COLOUR OR PRESERVATIVES
+    </p>
+  </div>
+
+  <!-- nav -->
+  <nav
+    class="transition-all duration-500 ease-in-out"
+    [class]="navClasses()"
+  >
+    <div class="mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-5 py-4 sm:px-8">
+
+      <!-- left links -->
+      <div class="hidden items-center gap-8 md:flex">
+        @for (l of links; track l; let i = $index) {
+          <a
+            [href]="'#' + l.toLowerCase()"
+            class="nav-link group relative text-sm font-semibold text-forest"
+            [style.--link-delay]="linkDelay(i)"
+          >
+            {{ l }}
+            <span [class]="underlineClasses(i)"></span>
+          </a>
+        }
+      </div>
+
+      <!-- mobile burger -->
+      <button
+        class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+        (click)="toggleMenu()"
+        aria-label="Menu"
+      >
+        <span class="burger-bar block h-[2px] w-6 bg-forest transition-all duration-300 ease-in-out" [class.is-open]="open()"></span>
+        <span class="burger-bar-2 block h-[2px] w-6 bg-forest transition-all duration-300 ease-in-out" [class.is-open]="open()"></span>
+      </button>
+
+      <!-- logo -->
+      <a href="#home" class="flex flex-col items-center gap-0.5 justify-self-center">
+        <app-sprout-logo className="h-6 w-6" />
+        <span class="font-serif-brand text-xl font-semibold tracking-tight text-forest sm:text-2xl">
+          Wellora Origins
+        </span>
+      </a>
+
+      <!-- right icons -->
+      <div class="flex items-center justify-end gap-2 sm:gap-4">
+        <button aria-label="Account" class="rounded-full p-2 transition-colors duration-300 ease-in-out hover:bg-forest/10">
+          <svg viewBox="0 0 24 24" class="h-5 w-5 text-forest" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 21 C4 16.5, 7.5 14, 12 14 C16.5 14, 20 16.5, 20 21" stroke-linecap="round" />
+          </svg>
+        </button>
+        <button aria-label="Bag" class="relative rounded-full p-2 transition-colors duration-300 ease-in-out hover:bg-forest/10">
+          <svg viewBox="0 0 24 24" class="h-5 w-5 text-forest" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M5 8 H19 L18 21 H6 Z" stroke-linejoin="round" />
+            <path d="M9 8 V6.5 a3 3 0 0 1 6 0 V8" stroke-linecap="round" />
+          </svg>
+          <span class="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-forest text-[9px] font-bold text-cream">
+            0
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- mobile menu -->
+    @if (open()) {
+      <div class="mobile-menu overflow-hidden bg-cream/95 backdrop-blur-xl md:hidden">
+        <div class="flex flex-col gap-1 px-6 py-4">
+          @for (l of links; track l) {
+            <a
+              [href]="'#' + l.toLowerCase()"
+              (click)="closeMenu()"
+              class="border-b border-forest/10 py-3 font-serif-brand text-2xl text-forest"
+            >
+              {{ l }}
+            </a>
+          }
+        </div>
+      </div>
+    }
+  </nav>
+</header>

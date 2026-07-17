@@ -1,0 +1,60 @@
+<footer id="contact" class="grain relative overflow-hidden text-cream/80" style="background-color: #122619;">
+  <!-- glow -->
+  <div
+    class="pointer-events-none absolute -top-40 left-1/2 h-96 w-[70vw] -translate-x-1/2 rounded-full"
+    style="background: radial-gradient(ellipse, rgba(110,168,119,.14) 0%, transparent 65%);"
+  ></div>
+
+  <div class="relative mx-auto max-w-6xl px-6 pb-10 pt-20">
+    <div class="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr_1fr_1.4fr]">
+      @for (c of cols; track c.title; let i = $index) {
+        <div appReveal [delay]="colDelay(i)">
+          <h4 class="text-[11px] font-extrabold uppercase tracking-[0.28em] text-sprout">{{ c.title }}</h4>
+          <ul class="mt-5 space-y-3">
+            @for (it of c.items; track it) {
+              <li>
+                <a href="#contact" class="text-sm leading-relaxed transition-colors duration-300 ease-in-out hover:text-cream">
+                  {{ it }}
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+
+      <div appReveal [delay]="0.4">
+        <h4 class="text-[11px] font-extrabold uppercase tracking-[0.28em] text-sprout">Stay Connected</h4>
+        <p class="mt-5 text-sm text-cream/60">Recipes, restocks and the occasional discount.</p>
+        <form class="mt-4 flex gap-2" (submit)="onSubscribe($event)">
+          <input
+            type="email"
+            required
+            placeholder="Your email"
+            class="w-full min-w-0 rounded-full border border-cream/20 bg-cream/10 px-5 py-3 text-sm text-cream placeholder:text-cream/40 outline-none transition-colors duration-300 ease-in-out focus:border-sprout"
+          />
+          <button
+            type="submit"
+            class="shrink-0 rounded-full bg-moss px-6 py-3 text-sm font-bold text-cream transition-all duration-300 ease-in-out hover:bg-leaf hover:text-forest active:scale-95"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div appReveal class="mt-16 flex flex-col items-center justify-between gap-4 border-t border-cream/10 pt-7 sm:flex-row">
+      <a href="#home" class="flex items-center gap-2">
+        <app-sprout-logo className="h-5 w-5" color="#9ec49a" />
+        <span class="font-serif-brand text-lg font-semibold text-cream">Wellora Origins</span>
+      </a>
+      <p class="text-xs text-cream/45">© 2026 Wellora Origins · Product of India</p>
+    </div>
+  </div>
+
+  <!-- giant ghost word -->
+  <div aria-hidden="true" class="pointer-events-none select-none overflow-hidden">
+    <p appReveal class="footer-ghost text-stroke-cream whitespace-nowrap text-center font-serif-brand text-[13.5vw] font-bold leading-none">
+      Wellora Origins
+    </p>
+  </div>
+</footer>

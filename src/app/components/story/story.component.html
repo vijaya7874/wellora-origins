@@ -1,0 +1,102 @@
+<section id="about" class="relative overflow-hidden bg-cream py-24 sm:py-32">
+  <div class="mx-auto grid max-w-6xl items-center gap-14 px-6 lg:grid-cols-2">
+
+    <!-- illustration -->
+    <div appReveal [y]="50" class="story-illustration relative">
+      <div class="relative overflow-hidden rounded-[32px] shadow-[0_40px_80px_-40px_rgba(18,38,26,.4)]">
+        <svg viewBox="0 0 560 460" class="block w-full">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#cfe7ee" />
+              <stop offset="100%" stop-color="#eef3df" />
+            </linearGradient>
+            <linearGradient id="field" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8fb96e" />
+              <stop offset="100%" stop-color="#5c8f4c" />
+            </linearGradient>
+          </defs>
+
+          <rect width="560" height="460" fill="url(#sky)" />
+
+          <!-- sun -->
+          <g [style.transform]="sunTransform()">
+            <g class="anim-spin-slow" style="transform-origin: 452px 88px;">
+              @for (i of sunSpikes; track i) {
+                <rect x="449" y="34" width="6" height="18" rx="3" fill="#f4c04a" [attr.transform]="'rotate(' + (i * 30) + ' 452 88)'" />
+              }
+            </g>
+            <circle cx="452" cy="88" r="30" fill="#f6c85f" />
+            <circle cx="452" cy="88" r="22" fill="#f9d67c" />
+          </g>
+
+          <!-- clouds -->
+          <g opacity=".85">
+            <ellipse cx="120" cy="80" rx="42" ry="16" fill="#ffffff" />
+            <ellipse cx="154" cy="72" rx="30" ry="13" fill="#ffffff" />
+            <ellipse cx="300" cy="130" rx="34" ry="12" fill="#ffffff" opacity=".7" />
+          </g>
+
+          <!-- field -->
+          <g [style.transform]="fieldTransform()">
+            <path d="M0 240 C 140 214, 380 214, 560 244 L 560 460 L 0 460 Z" fill="url(#field)" />
+            @for (i of cropRows; track i) {
+              <path [attr.d]="cropPath(i)" stroke="#4c7a3e" stroke-width="4" fill="none" opacity=".5" />
+            }
+            @for (p of palms; track p.x) {
+              <g [attr.transform]="palmTransform(p)">
+                <g appReveal [y]="26" [delay]="p.delay">
+                  <path d="M0 0 C -3 -18, -2 -34, 2 -48" stroke="#b37b3f" stroke-width="6" fill="none" stroke-linecap="round" />
+                  <g class="anim-sway" style="transform-origin: 2px -48px;">
+                    <path d="M2 -48 C -14 -56, -26 -54, -34 -44 C -22 -40, -8 -40, 2 -48 Z" fill="#4d8a5f" />
+                    <path d="M2 -48 C 16 -58, 30 -56, 38 -46 C 26 -41, 10 -41, 2 -48 Z" fill="#5f9c6e" />
+                    <path d="M2 -48 C -4 -62, -14 -68, -26 -66 C -18 -56, -6 -50, 2 -48 Z" fill="#6ea877" />
+                    <path d="M2 -48 C 8 -62, 18 -68, 30 -66 C 22 -56, 10 -50, 2 -48 Z" fill="#54906a" />
+                    <path d="M2 -48 C -1 -64, 2 -72, 8 -76 C 12 -66, 8 -54, 2 -48 Z" fill="#7fb589" />
+                  </g>
+                  <circle cx="0" cy="-46" r="4" fill="#8a5a2b" />
+                  <circle cx="6" cy="-43" r="3.4" fill="#8a5a2b" />
+                </g>
+              </g>
+            }
+          </g>
+        </svg>
+      </div>
+
+      <!-- floating card -->
+      <div appReveal [y]="40" [delay]="0.55" class="story-card-wrap absolute -bottom-7 left-6">
+        <div class="anim-float rounded-2xl bg-white px-6 py-4 shadow-[0_24px_50px_-20px_rgba(18,38,26,.45)]">
+          <p class="font-serif-brand text-lg font-semibold text-forest">Since our roots</p>
+          <p class="text-xs font-semibold text-forest/55">Grown in Guntur, Andhra Pradesh</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- copy -->
+    <div>
+      <p appReveal class="text-[11px] font-bold uppercase tracking-[0.34em] text-moss">Our story</p>
+      <h2 class="mt-4 font-serif-brand text-[clamp(2.2rem,5vw,3.8rem)] font-medium leading-tight tracking-tight text-forest">
+        <app-word-reveal text="Rooted in real farming" />
+      </h2>
+      <app-drawn-line className="mt-6 h-[3px] w-24 rounded-full bg-leaf block" [delay]="0.3" />
+      <p appReveal [delay]="0.2" class="mt-6 leading-relaxed text-forest/70">
+        We grew up in the fields of Guntur, where farming is a way of life, not a job. Wellora
+        Origins began as a way to bring those same authentic superfoods — grown honestly,
+        processed gently — into modern kitchens across India.
+      </p>
+      <p appReveal [delay]="0.35" class="mt-4 leading-relaxed text-forest/70">
+        Every jar names a single plant, and then it stops. Nothing added, because there is
+        nothing we would want to add.
+      </p>
+      <p appReveal [delay]="0.5">
+        <a
+          href="#about"
+          class="group relative mt-8 inline-block overflow-hidden rounded-full bg-forest px-8 py-4 text-sm font-bold text-cream shadow-[0_18px_35px_-14px_rgba(18,38,26,.6)] transition-transform duration-300 ease-in-out hover:scale-[1.04] active:scale-95"
+        >
+          <span class="relative z-10">Read our story</span>
+          <span class="absolute inset-0 -translate-x-full bg-moss transition-transform duration-500 ease-out group-hover:translate-x-0"></span>
+        </a>
+      </p>
+    </div>
+
+  </div>
+</section>

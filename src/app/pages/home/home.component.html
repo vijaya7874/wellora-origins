@@ -1,0 +1,23 @@
+<div class="min-h-screen bg-cream font-sans">
+
+  @if (loading()) {
+    <app-preloader (reveal)="onReveal()" (done)="onDone()"></app-preloader>
+  }
+
+  <app-navbar [started]="started()"></app-navbar>
+
+  <main>
+    <app-hero [started]="started()"></app-hero>
+    <app-marquee [dark]="true"></app-marquee>
+    <app-best-sellers></app-best-sellers>
+    <app-process></app-process>
+    <app-why-us></app-why-us>
+    <app-marquee [dark]="false"></app-marquee>
+    <app-story></app-story>
+  </main>
+
+  <app-footer></app-footer>
+
+  <app-flying-jar></app-flying-jar>
+
+</div>

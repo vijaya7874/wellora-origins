@@ -1,0 +1,77 @@
+<div
+  class="preloader-root fixed inset-0 z-[100] flex flex-col items-center justify-center grain"
+  [class.is-leaving]="leaving()"
+  style="background-color: #0e1c13;"
+>
+  <!-- soft radial glow behind the line -->
+  <div
+    class="preloader-glow absolute h-[42vmin] w-[42vmin] rounded-full"
+    style="background: radial-gradient(circle, rgba(110,168,119,.22) 0%, transparent 65%);"
+  ></div>
+
+  <svg viewBox="0 0 900 260" class="w-[min(82vw,720px)] overflow-visible">
+    <defs>
+      <filter id="neon" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur stdDeviation="5" result="b1" />
+        <feGaussianBlur stdDeviation="14" result="b2" />
+        <feMerge>
+          <feMergeNode in="b2" />
+          <feMergeNode in="b1" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+      <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#6ea877" />
+        <stop offset="55%" stop-color="#9ec49a" />
+        <stop offset="100%" stop-color="#d7ecd2" />
+      </linearGradient>
+    </defs>
+
+    <!-- pulse line that becomes a stem -->
+    <path
+      class="preloader-line"
+      d="M20 170 L180 170 L215 170 L245 120 L275 210 L305 96 L335 170 L420 170
+         C 480 170, 520 168, 560 150 C 610 126, 648 96, 668 58"
+      fill="none"
+      stroke="url(#lineGrad)"
+      stroke-width="5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      filter="url(#neon)"
+      pathLength="1000"
+      stroke-dasharray="1000"
+      stroke-dashoffset="1000"
+    />
+
+    <!-- left leaf -->
+    <path
+      class="preloader-leaf-left"
+      d="M660 96 C 620 92, 590 66, 584 30 C 624 34, 654 60, 660 96 Z"
+      fill="#6ea877"
+      filter="url(#neon)"
+      style="transform-origin: 660px 96px;"
+    />
+    <!-- right leaf -->
+    <path
+      class="preloader-leaf-right"
+      d="M672 62 C 700 40, 736 34, 768 44 C 744 74, 706 80, 672 62 Z"
+      fill="#9ec49a"
+      filter="url(#neon)"
+      style="transform-origin: 672px 62px;"
+    />
+  </svg>
+
+  <!-- brand reveal -->
+  <div class="mt-8 overflow-hidden">
+    <div class="preloader-brand text-center">
+      <p class="font-serif-brand text-[clamp(1.8rem,5vw,3.2rem)] font-medium tracking-wide text-cream">
+        Wellora <span class="italic text-sprout">Origins</span>
+      </p>
+    </div>
+  </div>
+  <div class="overflow-hidden">
+    <p class="preloader-tagline mt-3 text-[11px] font-semibold uppercase tracking-[0.42em] text-sprout/80">
+      From our farm to your family
+    </p>
+  </div>
+</div>

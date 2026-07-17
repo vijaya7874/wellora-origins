@@ -1,0 +1,6 @@
+.flying-jar {
+  position: fixed;
+  z-index: 60;
+  pointer-events: none;
+  will-change: top, left, width, height;
+}

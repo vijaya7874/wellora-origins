@@ -1,0 +1,113 @@
+<section
+  id="home"
+  class="relative flex min-h-screen items-center overflow-hidden pt-32 pb-20"
+  [class.is-started]="started()"
+  (mousemove)="onMouseMove($event)"
+>
+  <!-- morphing blobs -->
+  <div class="anim-blob absolute -top-24 right-[-12%] h-[58vmin] w-[58vmin] bg-[#dcead8]"></div>
+  <div class="anim-blob absolute bottom-[-18%] left-[-10%] h-[52vmin] w-[52vmin] bg-[#f1e8cf]" style="animation-delay: -6s;"></div>
+  <div class="anim-blob absolute top-[30%] left-[38%] h-[30vmin] w-[30vmin] bg-[#e6efdd] opacity-70" style="animation-delay: -3s;"></div>
+
+  <!-- floating leaves -->
+  <div class="absolute left-[4%] top-[24%] hidden lg:block" [style.transform]="leafTransform()">
+    <div class="hero-leaf-branch">
+      <div class="anim-sway">
+        <app-leaf-branch className="h-44 w-44 text-leaf" />
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute right-[5%] top-[16%] hidden lg:block" [style.transform]="jarTransform()">
+    <div class="hero-jar" #jarAnchor [style.opacity]="jarAnchorOpacity()">
+      <div class="anim-float">
+        <app-jar-svg
+          icon="amla"
+          powderTop="#d3c98f"
+          powderBottom="#b3a05e"
+          label="Amla"
+          sub="Whole fruit powder"
+          className="h-64 w-auto drop-shadow-[0_30px_35px_rgba(18,38,26,.28)]"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-[14%] right-[16%] hidden md:block" [style.transform]="leafJarTransform()">
+    <div class="hero-pop-1">
+      <div class="anim-float-2">
+        <app-single-leaf className="h-16 w-16 rotate-[24deg]" color="#c9d9ae" />
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute left-[14%] bottom-[10%] hidden md:block" [style.transform]="jarLeafTransform()">
+    <div class="hero-pop-2">
+      <div class="anim-float">
+        <app-single-leaf className="h-10 w-10 -rotate-[30deg]" color="#a9c69b" />
+      </div>
+    </div>
+  </div>
+
+  <!-- copy -->
+  <div class="relative z-10 mx-auto max-w-3xl px-6 text-center lg:ml-[16%] lg:text-left" [style]="headStyle()">
+    <div class="overflow-hidden">
+      <p class="hero-kicker text-[11px] font-bold uppercase tracking-[0.34em] text-moss sm:text-xs">
+        From our farm to your family
+      </p>
+    </div>
+
+    <h1 class="mt-6 font-serif-brand text-[clamp(2.9rem,8vw,6rem)] font-medium leading-[1.02] tracking-tight text-forest">
+      <span class="block overflow-hidden pb-1">
+        <span class="hero-line hero-line-1 block">Clean &amp;</span>
+      </span>
+      <span class="block overflow-hidden pb-1">
+        <span class="hero-line hero-line-2 block"><span class="italic text-moss">simple</span></span>
+      </span>
+      <span class="block overflow-hidden pb-1">
+        <span class="hero-line hero-line-3 block">plant nutrition</span>
+      </span>
+    </h1>
+
+    <p class="hero-sub mx-auto mt-6 max-w-md text-[15px] leading-relaxed text-forest/70 sm:text-base lg:mx-0">
+      From our farming roots to your family's wellness — pure, trusted, and
+      affordable superfoods for everyday living.
+    </p>
+
+    <div class="hero-cta mt-9 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
+      <a
+        href="#shop"
+        class="group relative overflow-hidden rounded-full bg-forest px-8 py-4 text-sm font-bold text-cream shadow-[0_18px_35px_-14px_rgba(18,38,26,.6)] transition-transform duration-300 ease-in-out hover:scale-[1.04] active:scale-95"
+      >
+        <span class="relative z-10">Shop our superfoods</span>
+        <span class="absolute inset-0 -translate-x-full bg-moss transition-transform duration-500 ease-out group-hover:translate-x-0"></span>
+      </a>
+      <a
+        href="#about"
+        class="rounded-full border-[1.5px] border-forest/40 px-8 py-4 text-sm font-bold text-forest transition-all duration-300 ease-in-out hover:border-forest hover:bg-forest hover:text-cream"
+      >
+        Our story
+      </a>
+    </div>
+
+    <div class="hero-rating mt-9 flex items-center justify-center gap-3 lg:justify-start">
+      <div class="flex text-honey">
+        @for (i of stars; track i) {
+          <span class="hero-star" [style.--star-delay]="starDelay(i)">
+            <app-star-icon className="h-4 w-4" />
+          </span>
+        }
+      </div>
+      <p class="text-sm font-semibold text-forest/60">
+        Trusted by 10,000+ households across India
+      </p>
+    </div>
+  </div>
+
+  <!-- scroll cue -->
+  <div class="hero-scroll-cue absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
+    <div class="flex h-12 w-7 items-start justify-center rounded-full border-2 border-forest/30 p-1.5">
+      <div class="anim-bob h-2.5 w-2.5 rounded-full bg-forest"></div>
+    </div>
+  </div>
+</section>

@@ -1,9 +1,24 @@
 <section
   id="home"
-  class="relative flex min-h-screen flex-col items-center overflow-hidden pt-32 pb-20 md:flex-row"
+  class="relative flex min-h-screen items-center overflow-hidden pt-32 pb-20"
   [class.is-started]="started()"
   (mousemove)="onMouseMove($event)"
 >
+  <!-- background video, dulled with an overlay so content stays readable -->
+  <video
+    #bgVideo
+    class="pointer-events-none absolute inset-0 h-full w-full object-cover"
+    autoplay
+    muted
+    loop
+    playsinline
+    poster="videos/hero-bg-poster.png"
+  >
+    <source src="videos/hero-bg.mp4" type="video/mp4" />
+  </video>
+  <div class="pointer-events-none absolute inset-0 bg-cream/35"></div>
+  <div class="pointer-events-none absolute inset-0 bg-forest/8"></div>
+
   <!-- morphing blobs -->
   <div class="anim-blob absolute -top-24 right-[-12%] h-[58vmin] w-[58vmin] bg-[#dcead8]"></div>
   <div class="anim-blob absolute bottom-[-18%] left-[-10%] h-[52vmin] w-[52vmin] bg-[#f1e8cf]" style="animation-delay: -6s;"></div>
@@ -34,15 +49,15 @@
     </div>
   </div>
 
-  <!-- copy -->
-  <div class="relative z-10 mx-auto max-w-3xl px-6 text-center md:ml-[26%] md:text-left">
-    <div class="overflow-hidden">
+  <!-- copy + jar, laid out via CSS grid so it reflows correctly at every width -->
+  <div class="hero-copy-grid relative z-10 mx-auto w-full max-w-6xl px-6 text-center">
+    <div class="area-kicker overflow-hidden">
       <p class="hero-kicker text-[11px] font-bold uppercase tracking-[0.34em] text-moss sm:text-xs">
         From our farm to your family
       </p>
     </div>
 
-    <h1 class="mt-6 font-serif-brand text-[clamp(2.9rem,8vw,6rem)] font-medium leading-[1.02] tracking-tight text-forest">
+    <h1 class="area-heading mt-6 font-serif-brand text-[clamp(2.9rem,8vw,6rem)] font-medium leading-[1.02] tracking-tight text-forest">
       <span class="block overflow-hidden pb-1">
         <span class="hero-line hero-line-1 block">Clean &amp;</span>
       </span>
@@ -54,12 +69,28 @@
       </span>
     </h1>
 
-    <p class="hero-sub mx-auto mt-6 max-w-md text-[15px] leading-relaxed text-forest/70 sm:text-base md:mx-0">
+    <p class="area-para hero-sub mx-auto mt-6 max-w-md text-[15px] leading-relaxed text-forest/70 sm:text-base">
       From our farming roots to your family's wellness — pure, trusted, and
       affordable superfoods for everyday living.
     </p>
 
-    <div class="hero-cta mt-9 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+    <!-- jar: sits between the paragraph and CTA on mobile, floats beside the whole text block on desktop -->
+    <div class="area-jar mt-10 flex justify-center md:mt-0" [style.transform]="jarTransform()">
+      <div class="hero-jar" #jarAnchor [style.opacity]="jarAnchorOpacity()">
+        <div class="anim-float">
+          <app-jar-svg
+            icon="moringa"
+            powderTop="#9dbb83"
+            powderBottom="#6f9a5c"
+            label="Moringa"
+            sub="Pure leaf powder"
+            className="h-52 w-auto drop-shadow-[0_30px_35px_rgba(18,38,26,.28)] md:h-64"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="area-cta hero-cta mt-9 flex flex-wrap items-center justify-center gap-4">
       <a
         href="#shop"
         (click)="onShopCtaClick($event)"
@@ -76,7 +107,7 @@
       </a>
     </div>
 
-    <div class="hero-rating mt-9 flex items-center justify-center gap-3 md:justify-start">
+    <div class="area-rating hero-rating mt-9 flex items-center justify-center gap-3">
       <div class="flex text-honey">
         @for (i of stars; track i) {
           <span class="hero-star" [style.--star-delay]="starDelay(i)">
@@ -87,25 +118,6 @@
       <p class="text-sm font-semibold text-forest/60">
         Trusted by 10,000+ households across India
       </p>
-    </div>
-  </div>
-
-  <!-- jar: stacks below the copy on mobile (normal block flow), floats top-right on desktop -->
-  <div
-    class="hero-jar-slot relative z-10 mt-10 flex w-full justify-center px-6 md:absolute md:right-[5%] md:top-[16%] md:mt-0 md:block md:w-auto md:px-0"
-    [style.transform]="jarTransform()"
-  >
-    <div class="hero-jar" #jarAnchor [style.opacity]="jarAnchorOpacity()">
-      <div class="anim-float">
-        <app-jar-svg
-          icon="moringa"
-          powderTop="#9dbb83"
-          powderBottom="#6f9a5c"
-          label="Moringa"
-          sub="Pure leaf powder"
-          className="h-52 w-auto drop-shadow-[0_30px_35px_rgba(18,38,26,.28)] md:h-64"
-        />
-      </div>
     </div>
   </div>
 

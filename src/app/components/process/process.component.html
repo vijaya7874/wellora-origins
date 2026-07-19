@@ -1,10 +1,8 @@
 <section class="relative bg-forest text-cream">
   <!-- curved top divider -->
-  <svg viewBox="0 0 1440 90" class="block w-full bg-cream" style="height: 90px;" preserveAspectRatio="none"
-    aria-hidden="true">
-    <path d="M0 90 H1440 V72 C1100 2, 340 2, 0 72 Z" fill="#1c3a2a" />
+  <svg viewBox="0 0 1440 90" class="block w-full bg-cream" style="height: 90px;" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 90 H1440 V2 C1100 72, 340 72, 0 2 Z" fill="#1c3a2a" />
   </svg>
-
 
   <div class="grain relative overflow-hidden py-24 sm:py-32">
     <!-- glow accents -->
@@ -28,16 +26,20 @@
         <!-- steps -->
         <div class="relative z-20 space-y-14 md:space-y-24">
           @for (s of steps; track s.n) {
-          <div appReveal [y]="30"
-            [class]="s.side === 'left' ? 'md:flex md:items-center md:justify-start' : 'md:flex md:items-center md:justify-end'">
             <div
-              class="glass-card max-w-sm rounded-3xl p-7 transition-transform duration-500 ease-in-out hover:scale-[1.03]"
-              [class]="s.side === 'left' ? 'md:mr-auto md:text-right' : 'md:ml-auto'">
-              <span class="font-serif-brand text-4xl font-semibold text-honey/90">{{ s.n }}</span>
-              <h3 class="mt-2 font-serif-brand text-2xl font-medium text-cream">{{ s.title }}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-cream/70">{{ s.text }}</p>
+              appReveal
+              [y]="30"
+              [class]="s.side === 'left' ? 'md:flex md:items-center md:justify-start' : 'md:flex md:items-center md:justify-end'"
+            >
+              <div
+                class="glass-card max-w-sm rounded-3xl p-7 transition-transform duration-500 ease-in-out hover:scale-[1.03]"
+                [class]="s.side === 'left' ? 'md:mr-auto md:text-right' : 'md:ml-auto'"
+              >
+                <span class="font-serif-brand text-4xl font-semibold text-honey/90">{{ s.n }}</span>
+                <h3 class="mt-2 font-serif-brand text-2xl font-medium text-cream">{{ s.title }}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-cream/70">{{ s.text }}</p>
+              </div>
             </div>
-          </div>
           }
         </div>
 
@@ -46,8 +48,14 @@
           <div class="sticky top-1/2 mx-auto w-40 -translate-y-1/2">
             <div #jarReveal class="process-jar">
               <div class="anim-float">
-                <app-jar-svg icon="moringa" powderTop="#9dbb83" powderBottom="#6f9a5c" label="Moringa"
-                  sub="Pure leaf powder" className="w-full drop-shadow-[0_0_45px_rgba(158,196,154,.4)]" />
+                <app-jar-svg
+                  icon="moringa"
+                  powderTop="#9dbb83"
+                  powderBottom="#6f9a5c"
+                  label="Moringa"
+                  sub="Pure leaf powder"
+                  className="w-full drop-shadow-[0_0_45px_rgba(158,196,154,.4)]"
+                />
               </div>
             </div>
           </div>

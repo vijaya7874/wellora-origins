@@ -1,3 +1,44 @@
+/* ---------- copy + jar grid layout ---------- */
+
+.hero-copy-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 0;
+}
+
+.area-kicker { grid-area: kicker; }
+.area-heading { grid-area: heading; }
+.area-para { grid-area: para; }
+.area-jar { grid-area: jar; }
+.area-cta { grid-area: cta; }
+.area-rating { grid-area: rating; }
+
+/* single-column stack in DOM order at every width — kicker, heading,
+   paragraph, jar, cta, rating. The text centers itself via text-align,
+   independent of the jar, which breaks out of this flow at desktop. */
+.hero-copy-grid {
+  grid-template-areas:
+    "kicker"
+    "heading"
+    "para"
+    "jar"
+    "cta"
+    "rating";
+}
+
+/* desktop: jar pulls out of the stack and pins to the right edge of the
+   (nearly full-width) hero, independent of the centered text's own width —
+   so the text stays centered as its own block rather than being dragged
+   off-center by whatever width the jar needs. */
+@media (min-width: 768px) {
+  .area-jar {
+    position: absolute;
+    right: 2%;
+    top: 0%;
+    margin-top: -25% !important;
+  }
+}
+
 /* ---------- floating art entrance ---------- */
 
 .hero-leaf-branch {

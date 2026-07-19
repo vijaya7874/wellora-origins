@@ -4,6 +4,7 @@ import {
   ElementRef,
   ViewChild,
   computed,
+  effect,
   input,
   signal,
 } from '@angular/core';
@@ -32,6 +33,8 @@ export class HeroComponent implements AfterViewInit {
   private readonly mx = signal(0);
   private readonly my = signal(0);
 
+  private videoStarted = false;
+
   readonly jarTransform = computed(() => `translate(${this.mx() * 26}px, ${this.my() * 18}px)`);
   readonly leafTransform = computed(() => `translate(${this.mx() * -30}px, ${this.my() * -20}px)`);
   readonly leafJarTransform = computed(() => `translate(${this.mx() * -30}px, ${this.my() * 18}px)`);
@@ -44,13 +47,22 @@ export class HeroComponent implements AfterViewInit {
     return this.flight.progress() > 0 ? 0 : 1;
   });
 
-  constructor(private el: ElementRef<HTMLElement>, private flight: JarFlightService) {}
+  constructor(private el: ElementRef<HTMLElement>, private flight: JarFlightService) {
+    // Only start the background video once the preloader has revealed the
+    // page — not immediately on mount, since the Hero exists in the DOM
+    // (hidden behind the preloader) for the whole intro sequence.
+    effect(() => {
+      if (this.started() && !this.videoStarted) {
+        this.videoStarted = true;
+        this.tryPlayBackgroundVideo();
+      }
+    });
+  }
 
   ngAfterViewInit(): void {
     if (this.jarAnchorRef) {
       this.flight.registerStart(this.jarAnchorRef.nativeElement);
     }
-    this.tryPlayBackgroundVideo();
   }
 
   /**

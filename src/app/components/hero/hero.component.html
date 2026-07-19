@@ -1,8 +1,19 @@
-<section id="home" class="relative flex min-h-screen items-center overflow-hidden pt-32 pb-20"
-  [class.is-started]="started()" (mousemove)="onMouseMove($event)">
+<section
+  id="home"
+  class="relative flex min-h-screen items-center overflow-hidden pt-32 pb-20"
+  [class.is-started]="started()"
+  (mousemove)="onMouseMove($event)"
+>
   <!-- background video, dulled with an overlay so content stays readable -->
-  <video #bgVideo class="pointer-events-none absolute inset-0 h-full w-full object-cover" autoplay muted loop
-    playsinline poster="videos/hero-bg-poster.png">
+  <video
+    #bgVideo
+    class="pointer-events-none absolute inset-0 h-full w-full object-cover"
+    autoplay
+    muted
+    loop
+    playsinline
+    poster="videos/hero-bg-poster.png"
+  >
     <source src="videos/hero-bg.mp4" type="video/mp4" />
   </video>
   <div class="pointer-events-none absolute inset-0 bg-cream/35"></div>
@@ -10,10 +21,8 @@
 
   <!-- morphing blobs -->
   <div class="anim-blob absolute -top-24 right-[-12%] h-[58vmin] w-[58vmin] bg-[#dcead8]"></div>
-  <div class="anim-blob absolute bottom-[-18%] left-[-10%] h-[52vmin] w-[52vmin] bg-[#f1e8cf]"
-    style="animation-delay: -6s;"></div>
-  <div class="anim-blob absolute top-[30%] left-[38%] h-[30vmin] w-[30vmin] bg-[#e6efdd] opacity-70"
-    style="animation-delay: -3s;"></div>
+  <div class="anim-blob absolute bottom-[-18%] left-[-10%] h-[52vmin] w-[52vmin] bg-[#f1e8cf]" style="animation-delay: -6s;"></div>
+  <div class="anim-blob absolute top-[30%] left-[38%] h-[30vmin] w-[30vmin] bg-[#e6efdd] opacity-70" style="animation-delay: -3s;"></div>
 
   <!-- floating leaves -->
   <div class="absolute left-[4%] top-[24%] hidden md:block" [style.transform]="leafTransform()">
@@ -48,8 +57,7 @@
       </p>
     </div>
 
-    <h1
-      class="area-heading mt-6 font-serif-brand text-[clamp(2.9rem,8vw,6rem)] font-medium leading-[1.02] tracking-tight text-forest">
+    <h1 class="area-heading mt-6 font-serif-brand text-[clamp(2.9rem,8vw,6rem)] font-medium leading-[1.02] tracking-tight text-forest">
       <span class="block overflow-hidden pb-1">
         <span class="hero-line hero-line-1 block">Clean &amp;</span>
       </span>
@@ -70,21 +78,31 @@
     <div class="area-jar mt-10 flex justify-center md:mt-0" [style.transform]="jarTransform()">
       <div class="hero-jar" #jarAnchor [style.opacity]="jarAnchorOpacity()">
         <div class="anim-float">
-          <app-jar-svg icon="moringa" powderTop="#9dbb83" powderBottom="#6f9a5c" label="Moringa" sub="Pure leaf powder"
-            className="h-52 w-auto drop-shadow-[0_30px_35px_rgba(18,38,26,.28)] md:h-64" />
+          <app-jar-svg
+            icon="moringa"
+            powderTop="#9dbb83"
+            powderBottom="#6f9a5c"
+            label="Moringa"
+            sub="Pure leaf powder"
+            className="h-52 w-auto drop-shadow-[0_30px_35px_rgba(18,38,26,.28)] md:h-64"
+          />
         </div>
       </div>
     </div>
 
     <div class="area-cta hero-cta mt-9 flex flex-wrap items-center justify-center gap-4">
-      <a href="#shop" (click)="onShopCtaClick($event)"
-        class="group relative overflow-hidden rounded-full bg-forest px-8 py-4 text-sm font-bold text-cream shadow-[0_18px_35px_-14px_rgba(18,38,26,.6)] transition-transform duration-300 ease-in-out hover:scale-[1.04] active:scale-95">
+      <a
+        href="#shop"
+        (click)="onShopCtaClick($event)"
+        class="group relative overflow-hidden rounded-full bg-forest px-8 py-4 text-sm font-bold text-cream shadow-[0_18px_35px_-14px_rgba(18,38,26,.6)] transition-transform duration-300 ease-in-out hover:scale-[1.04] active:scale-95"
+      >
         <span class="relative z-10">Shop our superfoods</span>
-        <span
-          class="absolute inset-0 -translate-x-full bg-moss transition-transform duration-500 ease-out group-hover:translate-x-0"></span>
+        <span class="absolute inset-0 -translate-x-full bg-moss transition-transform duration-500 ease-out group-hover:translate-x-0"></span>
       </a>
-      <a href="#about"
-        class="rounded-full border-[1.5px] border-forest/40 px-8 py-4 text-sm font-bold text-forest transition-all duration-300 ease-in-out hover:border-forest hover:bg-forest hover:text-cream">
+      <a
+        href="#about"
+        class="rounded-full border-[1.5px] border-forest/40 px-8 py-4 text-sm font-bold text-forest transition-all duration-300 ease-in-out hover:border-forest hover:bg-forest hover:text-cream"
+      >
         Our story
       </a>
     </div>
@@ -92,9 +110,9 @@
     <div class="area-rating hero-rating mt-9 flex items-center justify-center gap-3">
       <div class="flex text-honey">
         @for (i of stars; track i) {
-        <span class="hero-star" [style.--star-delay]="starDelay(i)">
-          <app-star-icon className="h-4 w-4" />
-        </span>
+          <span class="hero-star" [style.--star-delay]="starDelay(i)">
+            <app-star-icon className="h-4 w-4" />
+          </span>
         }
       </div>
       <p class="text-sm font-semibold text-forest/60">
